@@ -1,0 +1,13 @@
+{
+  "manifest_version": 3,
+  "name": "SIS Grade Autofiller",
+  "version": "0.1",
+  "description": "Autofill SIS grade fields from CSV (manual submit) made by Violdan Bayocot from SCS!!! SCS Strong!!",
+  "permissions": ["activeTab", "scripting"],
+  "host_permissions": [
+    "https://edp.usjr.edu.ph/"
+  ],
+  "action": {
+    "default_popup": "popup.html"
+  }
+}

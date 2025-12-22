@@ -1,0 +1,35 @@
+document.getElementById("apply").addEventListener("click", async () => {
+	const file = document.getElementById("csvFile").files[0];
+	if (!file) return alert("Please upload a CSV file.");
+	
+	Papa.parse(file, {
+		header: true,
+		skipEmptyLines: true,
+		complete: async (results) => {
+			if (!results.data.length) return alert("CSV is empty.");
+			if (!("student_id" in results.data[0]) || !("grade" in results.data[0])) {
+				return alert("CSV must contain student_id and grade columns.");
+			}
+			
+			// Tamang trim lang mga mam ser
+			const parsedData = results.data.map(r => ({
+				id: r.student_id.trim(),
+				grade: Number(r.grade)
+			}));
+			
+			const [tab] = await chrome.tabs.query({ active: true, currentWindow: true });
+			
+			// Inject other script (content.js) and send message
+			chrome.scripting.executeScript({
+				target: { tabId: tab.id },
+				files: ["content.js"]
+			}, () => {
+				// Send message to content script with data
+				chrome.tabs.sendMessage(tab.id, {
+					type: "APPLY_GRADES",
+					payload: parsedData
+				});
+			});
+		}
+	});
+});
