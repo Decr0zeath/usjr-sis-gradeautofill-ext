@@ -25,13 +25,13 @@ function autofillGrades(data) {
 			
 			let numericGrade = null;
 
-			if (grade !== "INC" && grade !== "NC") {
+			if (grade !== "INC" && grade !== "NC" && grade !== "F") {
 				numericGrade = Number(grade);
 			}
 
 			// EARLY RETURN: invalid grades
 			if (
-				!(grade === "INC" || grade === "NC") && 
+				!(grade === "INC" || grade === "NC" || grade === "F") && 
 				(Number.isNaN(numericGrade) ||
 				!(
 					(numericGrade >= 1.0 && numericGrade <= 3.9) ||
@@ -49,7 +49,7 @@ function autofillGrades(data) {
 			else if (grade === "INC") input.value = 70;
 			else if (numericGrade >= 1.0 && numericGrade <= 3.0 || 
 					numericGrade == 6.0 || numericGrade == 7.0) input.value = Math.round(numericGrade * 10);
-			else if (numericGrade >= 3.1 && numericGrade <= 3.9) input.value = 50;
+			else if ( (numericGrade >= 3.1 && numericGrade <= 3.9) || grade === "F") input.value = 50;
 
 			// Fire events so SIS recognizes the change
 			input.dispatchEvent(new Event("input", { bubbles: true }));

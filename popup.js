@@ -22,17 +22,11 @@ document.getElementById("apply").addEventListener("click", async () => {
 			}
 			
 			// Trimming
-const parsedData = results.data.map(r => ({
-    id: r.student_id.trim(),
-    grade: r.grade.trim()   // ALWAYS string
-}));
-
-			
-			/*const parsedData = results.data.map(r => ({
+			const parsedData = results.data.map(r => ({
 				id: r.student_id.trim(),
-				grade: Number(r.grade)
-			})); */
-			
+				grade: r.grade.trim()   // ALWAYS string
+			}));
+
 			const [tab] = await chrome.tabs.query({ active: true, currentWindow: true });
 			
 			// Inject content.js and send message
