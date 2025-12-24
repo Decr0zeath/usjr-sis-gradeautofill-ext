@@ -11,8 +11,6 @@ function autofillGrades(data) {
 	const rows = document.querySelectorAll("tr");
 	
 	data.forEach(({ id, grade }) => {
-		if (isNaN(grade) || grade < 0 || grade > 100) return;
-		
 		let matched = false;
 		
 		rows.forEach(row => {
@@ -25,16 +23,40 @@ function autofillGrades(data) {
 			const input = row.querySelector("input.inputGrd");
 			if (!input || input.disabled || input.readOnly) return;
 			
-			// Fill the input and trigger events
-			input.value = Math.round(grade * 10);
-			
+			let numericGrade = null;
+
+			if (grade !== "INC" && grade !== "NC") {
+				numericGrade = Number(grade);
+			}
+
+			// EARLY RETURN: invalid grades
+			if (
+				!(grade === "INC" || grade === "NC") && 
+				(Number.isNaN(numericGrade) ||
+				!(
+					(numericGrade >= 1.0 && numericGrade <= 3.9) ||
+					numericGrade === 5.0 ||
+					numericGrade === 6.0 ||
+					numericGrade === 7.0
+				))
+			) {
+				input.style.backgroundColor = "#E25B55";
+				return;
+			}
+
+			// Processing Valid Grades
+			if (grade === "NC") input.value = 60;
+			else if (grade === "INC") input.value = 70;
+			else if (numericGrade >= 1.0 && numericGrade <= 3.0 || 
+					numericGrade == 6.0 || numericGrade == 7.0) input.value = Math.round(numericGrade * 10);
+			else if (numericGrade >= 3.1 && numericGrade <= 3.9) input.value = 50;
+
 			// Fire events so SIS recognizes the change
 			input.dispatchEvent(new Event("input", { bubbles: true }));
 			input.dispatchEvent(new Event("change", { bubbles: true }));
-			
-			// Optional: highlight input for visibility
-			input.style.backgroundColor = "#fff3cd";
-			
+
+			input.style.backgroundColor = "#FFF3CD"; // Optional: highlight input for visibility
+		
 			filled++;
 			matched = true;
 		});
