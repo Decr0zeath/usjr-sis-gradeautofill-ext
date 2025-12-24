@@ -1,3 +1,13 @@
+document.getElementById("infoBtn").addEventListener("click", () => {
+	document.getElementById("mainPage").classList.add("hidden");
+	document.getElementById("infoPage").classList.remove("hidden");
+});
+
+document.getElementById("backBtn").addEventListener("click", () => {
+	document.getElementById("infoPage").classList.add("hidden");
+	document.getElementById("mainPage").classList.remove("hidden");
+});
+
 document.getElementById("apply").addEventListener("click", async () => {
 	const file = document.getElementById("csvFile").files[0];
 	if (!file) return alert("Please upload a CSV file.");
