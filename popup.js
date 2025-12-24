@@ -21,15 +21,21 @@ document.getElementById("apply").addEventListener("click", async () => {
 				return alert("CSV must contain student_id and grade columns.");
 			}
 			
-			// Tamang trim lang mga mam ser
-			const parsedData = results.data.map(r => ({
+			// Trimming
+const parsedData = results.data.map(r => ({
+    id: r.student_id.trim(),
+    grade: r.grade.trim()   // ALWAYS string
+}));
+
+			
+			/*const parsedData = results.data.map(r => ({
 				id: r.student_id.trim(),
 				grade: Number(r.grade)
-			}));
+			})); */
 			
 			const [tab] = await chrome.tabs.query({ active: true, currentWindow: true });
 			
-			// Inject other script (content.js) and send message
+			// Inject content.js and send message
 			chrome.scripting.executeScript({
 				target: { tabId: tab.id },
 				files: ["content.js"]
