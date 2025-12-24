@@ -1,0 +1,214 @@
+:root {
+	/* Main brand colors */
+	--gold: #FEB104;
+	--gold-soft: #4C3C1A;
+
+	--green: rgb(13, 62, 32);
+	--green-muted: rgb(67, 119, 87);
+	--green-dark: rgb(9, 45, 23);
+
+	/* Dark theme backgrounds */
+	--bg-dark: #0F1214;
+	--bg-card: #1A1F1D;
+	--bg-input: #151918;
+
+	/* Text / borders */
+	--text-light: #E6E7E8;
+	--text-dim: #A3A8A5;
+    --text-lightblue: #0272A6;
+	--border: #2A2F2C;
+}
+
+body {
+	font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+	padding: 6px;
+	width: 260px;
+	background: var(--bg-dark);
+	color: var(--text-light);
+}
+
+h3 {
+	margin: 0 0 4px 0;
+	text-align: center;
+	color: var(--gold);
+}
+
+.header {
+	display: flex;
+	align-items: center;
+	gap: 6px;
+	padding: 6px 0 8px 0;
+	border-bottom: 1px solid var(--border);
+	margin-bottom: 6px;
+}
+
+.header-logo {
+	width: 28px;
+	height: 28px;
+	border-radius: 6px;
+	object-fit: contain;
+	background: var(--bg-card);
+	padding: 2px;
+	box-shadow: 0 1px 3px rgba(0, 0, 0, 0.4);
+	border: 1px solid var(--border);
+}
+
+.header-title {
+	display: flex;
+	flex-direction: column;
+}
+
+.main-title {
+	font-size: 10px;
+	font-weight: 700;
+	color: var(--gold);
+	line-height: 1.1;
+}
+
+.sub-title {
+	font-size: 10px;
+	color: var(--text-dim);
+}
+
+.subtitle {
+	font-size: 11px;
+	text-align: center;
+	color: var(--text-dim);
+	margin-bottom: 6px;
+}
+
+.card {
+	background: var(--bg-card);
+	border-radius: 8px;
+	padding: 10px;
+	border-top: 3px solid var(--gold);
+	box-shadow: 0 2px 6px rgba(0, 0, 0, 0.3);
+}
+
+label {
+	font-size: 12px;
+	font-weight: 600;
+	display: block;
+	margin-bottom: 4px;
+	color: var(--text-light);
+}
+
+input[type="file"] {
+	width: 100%;
+	font-size: 11px;
+	padding: 4px;
+	border: 1px solid var(--border);
+	border-radius: 6px;
+	background: var(--bg-input);
+	color: var(--text-light);
+}
+
+input[type="file"]::file-selector-button {
+	background: var(--gold-soft);
+	border: none;
+	padding: 4px 8px;
+	color: var(--text-light);
+	cursor: pointer;
+	border-radius: 4px;
+}
+
+input[type="file"]::file-selector-button:hover {
+	background: var(--gold);
+	color: var(--green-dark);
+}
+
+.hint {
+	font-size: 10px;
+	color: var(--text-dim);
+	margin-top: 4px;
+}
+
+button {
+	width: 100%;
+	margin-top: 10px;
+	padding: 6px;
+	border: none;
+	border-radius: 6px;
+	background: var(--gold);
+	color: var(--green-dark);
+	font-size: 13px;
+	font-weight: 700;
+	cursor: pointer;
+}
+
+
+
+/* Hide info page by default */
+.hidden {
+	display: none;
+}
+
+/* Info Page Styling */
+#infoPage {
+	padding: 0;
+	font-size: 14px;
+}
+
+.back-button {
+	background: #ddd;
+	border: none;
+	padding: 6px 12px;
+	border-radius: 4px;
+	cursor: pointer;
+}
+
+.info-content h3 {
+	margin-top: 15px;
+	font-size: 14px;
+}
+
+.secondary-btn {
+	background: none;
+	border: none;
+	padding: 0;
+	color: var(--text-lightblue);
+	text-decoration: underline;
+	font-size: 11px;
+	cursor: pointer;
+	display: inline-block;
+	margin-top: 6px;
+}
+
+.footer {
+	margin-top: 12px;
+	padding-top: 8px;
+	border-top: 1px solid var(--border);
+	position: relative;
+}
+
+.footer-row {
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	gap: 8px;
+}
+
+.footer-logo {
+	width: 30px;
+	height: auto;
+	opacity: 0.9;
+    bottom: 10px;
+}
+
+.footer-dept {
+	font-size: 12px;
+	font-weight: 600;
+	color: var(--gold);
+	white-space: nowrap;
+    bottom: 10px;
+}
+
+.footer-author {
+    position: absolute;
+    color: rgba(30,30,30);
+	right: 0;
+	bottom: 0;
+    top: 5px;
+	font-size: 9px;
+	opacity: 0.5;
+}
