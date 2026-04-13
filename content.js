@@ -42,12 +42,17 @@ function autofillGrades(data) {
 				return;
 			}
 
+			// Detect exam period from page title
+			const pageTitle = document.title.toLowerCase();
+			const isFinals = pageTitle.includes("final");
+
 			// Processing Valid Grades
 			if (grade === "NC") input.value = 60;
 			else if (grade === "INC") input.value = 70;
-			else if (numericGrade >= 1.0 && numericGrade <= 3.0 || 
+			else if (numericGrade >= 1.0 && numericGrade <= 3.0 ||
 					numericGrade == 6.0 || numericGrade == 7.0) input.value = Math.round(numericGrade * 10);
-			else if ( (numericGrade >= 3.1 && numericGrade <= 5.0) || grade === "F") input.value = 50;
+			else if (numericGrade >= 3.1 && numericGrade <= 5.0) input.value = isFinals ? 50 : Math.round(numericGrade * 10);
+			else if (grade === "F") input.value = 50;
 
 			// Fire events so SIS recognizes the change
 			input.dispatchEvent(new Event("input", { bubbles: true }));
